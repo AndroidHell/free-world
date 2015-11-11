@@ -1,0 +1,27 @@
+.nav-style{
+  background-color: #00cbff;
+  border-color: #00cbff;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.navbar-brand {
+  font-size: 38px;
+  font-weight: 700;
+}
+
+h1 {
+  color: #00cbff;
+}
+
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.sides {
+  margin-left: 20px;
+  margin-right: 20px;
+}
