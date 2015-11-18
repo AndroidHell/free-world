@@ -1,4 +1,3 @@
-
 angular.module('freeWorld', ['ui.router'])
 .config([
 '$stateProvider',

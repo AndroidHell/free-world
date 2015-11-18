@@ -12,7 +12,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
 
-mongoose.connect('mongodb://localhost/news');
+mongoose.connect('mongodb://localhost/feed');
 
 require('./models/Posts');
 require('./models/Comments');
