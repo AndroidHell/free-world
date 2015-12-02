@@ -100,12 +100,26 @@ router.put('/posts/:post/edit', auth, function(req, res, next) {
 });
 
 // delete a post
-router.put('/posts/:post/delete', auth, function(req, res, next) {
-  req.post.delete(function(err, post){
-    if (err) { return next(err); }
-
-    res.json(post);
-  });
+router.delete('/posts/:post', function(req, res) {
+	req.post.comments.forEach(function(id) {
+		Comment.remove({
+			_id: id
+		}, function(err) {
+			if (err) { return next(err)}
+		});
+	})
+	Post.remove({
+		_id: req.params.post
+	}, function(err, post) {
+		if (err) { return next(err); }
+		
+		// get and return all the posts after you delete one
+		Post.find(function(err, posts) {
+			if (err) { return next(err); }
+			
+			res.json(posts);
+		});
+	});
 });
 /****************************** end UD *****************************/
 

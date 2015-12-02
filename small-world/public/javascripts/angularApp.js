@@ -58,7 +58,7 @@ function($stateProvider, $urlRouterProvider) {
       return res.data;
     });
   };
-
+  //post factory bits
   o.getAll = function() {
     return $http.get('/posts').success(function(data){
       angular.copy(data, o.posts);
@@ -89,7 +89,7 @@ function($stateProvider, $urlRouterProvider) {
     });
   };
   
-  /***************************** begin UD ****************************/
+  /***************************** begin D ****************************/
   o.edit = function(post) {
     return $http.put('/posts/' + post._id + '/edit', null, {
       headers: {Authorization: 'Bearer '+auth.getToken()}
@@ -98,15 +98,15 @@ function($stateProvider, $urlRouterProvider) {
     });
   };
   
-  o.delete = function(post) {
-    return $http.put('/posts/' + post._id + '/delete', null, {
-      headers: {Authorization: 'Bearer '+auth.getToken()}
-    }).success(function(data){
-      //post.upvotes -= 1;
-    });
-  };
-  /***************************** end UD ****************************/
+  /***************************** end D ****************************/
   
+  o.delete = function(post) {
+		return $http.delete('/posts/' + post._id).success(function(data) {
+			angular.copy(data, o.posts);
+		});
+	}
+  
+  //comment facotry bits
   o.addComment = function(id, comment) {
     return $http.post('/posts/' + id + '/comments', comment, {
       headers: {Authorization: 'Bearer '+auth.getToken()}
@@ -194,6 +194,8 @@ function($stateProvider, $urlRouterProvider) {
 
   return auth;
 }])
+
+//post controller
 .controller('MainCtrl', [
 '$scope',
 'posts',
@@ -215,6 +217,10 @@ function($scope, posts, auth){
     $scope.link = '';
     $scope.blog = '';
   };
+  
+  $scope.deletePost = function(post) {
+		posts.delete(post);
+	}
 
   $scope.incrementUpvotes = function(post) {
     posts.upvote(post);
@@ -225,6 +231,8 @@ function($scope, posts, auth){
   };
 
 }])
+
+//comment controller
 .controller('PostsCtrl', [
 '$scope',
 'posts',
@@ -244,6 +252,10 @@ function($scope, posts, post, auth){
     });
     $scope.body = '';
   };
+  
+  $scope.deletePost = function(post) {
+		posts.delete(post);
+	}
 
   $scope.incrementUpvotes = function(comment){
     posts.upvoteComment(post, comment);

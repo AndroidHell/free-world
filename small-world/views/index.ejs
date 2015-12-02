@@ -48,42 +48,44 @@
     </div>
 
     <div class="panel-group" id="accordion">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#accordionOne">
-             <p style="font-size: 18px; margin-top: 10px;">Add a new post</p>
-          </a>
-        </h4>
-      </div>
-     
-      <div id="accordionOne" class="panel-collapse collapse ">
-        <div class="panel-body">
-        
-          <form ng-submit="addPost()"
-          style="margin-top:30px;" ng-show="isLoggedIn()">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#accordionOne">
+               <p style="font-size: 18px; margin-top: 10px;">Add a new post</p>
+            </a>
+          </h4>
+        </div>
+       
+        <div id="accordionOne" class="panel-collapse collapse ">
+          <div class="panel-body">
           
-    
-          <div class="form-group">
-            <input type="text"
-            class="form-control"
-            placeholder="Title"
-            ng-model="title"></input>
-          </div>
-          <div class="form-group">
-            <input type="text"
-            class="form-control"
-            placeholder="Link"
-            ng-model="link"></input>
-          </div>
-          <div class="form-group">
-            <textarea
-            class="form-control"
-            placeholder="Blog"
-            ng-model="blog"></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary">Post</button>
-          </form>
+            <form ng-submit="addPost()"
+            style="margin-top:30px;" ng-show="isLoggedIn()">
+            
+      
+              <div class="form-group">
+                <input type="text"
+                class="form-control"
+                placeholder="Title"
+                ng-model="title"></input>
+              </div>
+              <div class="form-group">
+                <input type="text"
+                class="form-control"
+                placeholder="Link"
+                ng-model="link"></input>
+              </div>
+              <div class="form-group">
+                <textarea
+                class="form-control"
+                placeholder="Blog"
+                ng-model="blog"></textarea>
+              </div>
+              <a data-toggle="collapse" data-parent="#accordion" href="#accordionOne">
+                <button type="submit" class="btn btn-primary">Post</button>
+              </a>
+            </form>
           
           </div>
         </div>
@@ -115,9 +117,9 @@
       <span> (
         <a href="#/posts/{{post._id}}">Edit</a>
       </span> | 
-      <span>
-        <a href="#/posts/{{post._id}}">Delete</a>
-      </span> )
+      <span ng-click="deletePost(post)">
+				<a href="#"> Delete </a>
+			</span> )
       
       <div class="comments">
         <span>
@@ -178,9 +180,9 @@
       <span> (
         <a href="#/posts/{{post._id}}">Edit</a>
       </span> | 
-      <span>
-        <a href="#/posts/{{post._id}}">Delete</a>
-      </span> )
+      <span ng-click="deleteComment(comment)">
+				<a href="#/posts/{{post._id}}"> Delete </a>
+			</span> )
       
     </div>
     <form ng-submit="addComment()"
