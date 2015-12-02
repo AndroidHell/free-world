@@ -8,7 +8,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script src="/javascripts/angularApp.js"></script>
-  <script src="/controllers/main.js"></script> 
+  <script src="/main.js"></script> 
   <link href="/css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body ng-app="freeWorld">
@@ -109,12 +109,22 @@
         </span>
       </span>
       <span ng-show="post.author">
-        posted by {{post.author}} |
+        posted by {{post.author}}
       </span>
+      
+      <span> (
+        <a href="#/posts/{{post._id}}">Edit</a>
+      </span> | 
       <span>
-        <a href="#/posts/{{post._id}}">Comments</a>
-      </span>
-      <p>&nbsp;</p>
+        <a href="#/posts/{{post._id}}">Delete</a>
+      </span> )
+      
+      <div class="comments">
+        <span>
+          <a href="#/posts/{{post._id}}">Comments</a>
+        </span>
+      </div>
+      
     </div>
 
     
@@ -148,7 +158,7 @@
         </span>
       </p>
       
-      <!-- add image sharing uspport here? -->
+      <!-- add image sharing su pport here? -->
       
     </div>
     
@@ -164,6 +174,14 @@
       <span style="font-size:20px; margin-left:10px;">
         {{comment.body}}
       </span>
+      
+      <span> (
+        <a href="#/posts/{{post._id}}">Edit</a>
+      </span> | 
+      <span>
+        <a href="#/posts/{{post._id}}">Delete</a>
+      </span> )
+      
     </div>
     <form ng-submit="addComment()"
       style="margin-top:30px;" ng-show="isLoggedIn()">

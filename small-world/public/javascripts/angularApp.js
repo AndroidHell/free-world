@@ -89,6 +89,24 @@ function($stateProvider, $urlRouterProvider) {
     });
   };
   
+  /***************************** begin UD ****************************/
+  o.edit = function(post) {
+    return $http.put('/posts/' + post._id + '/edit', null, {
+      headers: {Authorization: 'Bearer '+auth.getToken()}
+    }).success(function(data){
+      //post.upvotes += 1;
+    });
+  };
+  
+  o.delete = function(post) {
+    return $http.put('/posts/' + post._id + '/delete', null, {
+      headers: {Authorization: 'Bearer '+auth.getToken()}
+    }).success(function(data){
+      //post.upvotes -= 1;
+    });
+  };
+  /***************************** end UD ****************************/
+  
   o.addComment = function(id, comment) {
     return $http.post('/posts/' + id + '/comments', comment, {
       headers: {Authorization: 'Bearer '+auth.getToken()}
@@ -111,6 +129,24 @@ function($stateProvider, $urlRouterProvider) {
       comment.upvotes -= 1;
     });
   };
+  
+   /***************************** begin UD ****************************/
+   o.editComment = function(post, comment) {
+    return $http.put('/posts/' + post._id + '/comments/'+ comment._id + '/edit', null, {
+      headers: {Authorization: 'Bearer '+auth.getToken()}
+    }).success(function(data){
+      //comment.upvotes += 1;
+    });
+  };
+  
+  o.deleteComment = function(post, comment) {
+    return $http.put('/posts/' + post._id + '/comments/'+ comment._id + '/delete', null, {
+      headers: {Authorization: 'Bearer '+auth.getToken()}
+    }).success(function(data){
+      //comment.upvotes -= 1;
+    }); 
+  };
+  /***************************** end UD ****************************/
 
   return o;
 }])
