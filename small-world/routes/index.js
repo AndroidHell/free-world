@@ -89,7 +89,7 @@ router.put('/posts/:post/downvote', auth, function(req, res, next) {
   });
 });
 
-/***************************** begin UD ****************************/
+/***************************** begin D ****************************/
 // edit a post
 router.put('/posts/:post/edit', auth, function(req, res, next) {
   req.post.edit(function(err, post){
@@ -98,6 +98,7 @@ router.put('/posts/:post/edit', auth, function(req, res, next) {
     res.json(post);
   });
 });
+/****************************** end D *****************************/
 
 // delete a post
 router.delete('/posts/:post', function(req, res) {
@@ -121,7 +122,7 @@ router.delete('/posts/:post', function(req, res) {
 		});
 	});
 });
-/****************************** end UD *****************************/
+
 
 // create a new comment
 router.post('/posts/:post/comments', auth, function(req, res, next) {
@@ -171,12 +172,21 @@ router.put('/posts/:post/comments/:comment/edit', auth, function(req, res, next)
 });
 
 // delete a comment
-router.put('/posts/:post/comments/:comment/delete', auth, function(req, res, next) {
-  req.comment.delete(function(err, comment){
-    if (err) { return next(err); }
-
-    res.json(comment);
-  });
+//router.delete('/posts/:post/comments/:comment/delete', auth, function(req, res, next) {
+router.delete('/posts/:post/comments/:comment/', function(req, res) {
+	
+	Comment.remove({
+		_id: req.params.comment
+	}, function(err, comment) {
+		if (err) { return next(err); }
+		
+		// get and return all the posts after you delete one
+		Comment.find(function(err, comment) {
+			if (err) { return next(err); }
+			
+			res.json(comment);
+		});
+	});
 });
 /****************************** end UD *****************************/
 

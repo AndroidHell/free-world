@@ -138,14 +138,13 @@ function($stateProvider, $urlRouterProvider) {
       //comment.upvotes += 1;
     });
   };
-  
-  o.deleteComment = function(post, comment) {
-    return $http.put('/posts/' + post._id + '/comments/'+ comment._id + '/delete', null, {
-      headers: {Authorization: 'Bearer '+auth.getToken()}
-    }).success(function(data){
-      //comment.upvotes -= 1;
-    }); 
-  };
+    
+    //this doesn't work
+    o.deleteComment = function(post, comment) {
+		return $http.delete('/posts/' + post._id + '/comments/'+ comment._id + '/delete').success(function(data) {
+			angular.copy(data, o.comments);
+		});
+	}
   /***************************** end UD ****************************/
 
   return o;
@@ -253,8 +252,8 @@ function($scope, posts, post, auth){
     $scope.body = '';
   };
   
-  $scope.deletePost = function(post) {
-		posts.delete(post);
+  $scope.deleteComment = function(comment) {
+		posts.deleteComment(post, comment);
 	}
 
   $scope.incrementUpvotes = function(comment){

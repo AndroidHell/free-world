@@ -47,6 +47,7 @@
       <h1>Feed</h1>
     </div>
 
+
     <div class="panel-group" id="accordion">
       <div class="panel panel-primary">
         <div class="panel-heading">
@@ -63,7 +64,7 @@
             <form ng-submit="addPost()"
             style="margin-top:30px;" ng-show="isLoggedIn()">
             
-      
+              <!-- form -->
               <div class="form-group">
                 <input type="text"
                 class="form-control"
@@ -82,9 +83,10 @@
                 placeholder="Blog"
                 ng-model="blog"></textarea>
               </div>
-              <a data-toggle="collapse" data-parent="#accordion" href="#accordionOne">
-                <button type="submit" class="btn btn-primary">Post</button>
-              </a>
+              
+              <button type="submit" class="btn btn-primary">Post</button>
+              <button type="submit" class="btn btn-primary" data-toggle="collapse" data-parent="#accordion" href="#accordionOne">Close</button>
+              
             </form>
           
           </div>
@@ -92,8 +94,11 @@
       </div>
     </div>  
 
-    <p>&nbsp;</p>
 
+    <p>&nbsp;</p>
+    
+    
+    <!-- posts -->
     <div ng-repeat="post in posts | orderBy:'-upvotes'">
     
       <span class="glyphicon glyphicon-plus-sign"
@@ -130,7 +135,6 @@
     </div>
 
     
-
     <div ng-hide="isLoggedIn()">
       <h3>You need to <a href="/#/login">Log In</a> or <a href="/#/register">Register</a> before you can add a post.</h3>
     </div>
@@ -164,6 +168,22 @@
       
     </div>
     
+    <!-- comment form -->
+    <form ng-submit="addComment()"
+      style="margin-top:30px;" ng-show="isLoggedIn()">
+      <h3>Add a new comment</h3>
+
+      <div class="form-group">
+        <input type="text"
+        class="form-control"
+        placeholder="Comment"
+        ng-model="body"></input>
+      </div>
+      <button type="submit" class="btn btn-primary">Post</button>
+    </form>
+    
+    <p>&nbsp;</p>
+    
     <div ng-repeat="comment in post.comments | orderBy:'-upvotes'">
     
       <span class="glyphicon glyphicon-plus-sign"
@@ -185,18 +205,7 @@
 			</span> )
       
     </div>
-    <form ng-submit="addComment()"
-      style="margin-top:30px;" ng-show="isLoggedIn()">
-      <h3>Add a new comment</h3>
-
-      <div class="form-group">
-        <input type="text"
-        class="form-control"
-        placeholder="Comment"
-        ng-model="body"></input>
-      </div>
-      <button type="submit" class="btn btn-primary">Post</button>
-    </form>
+    
 
     <div ng-hide="isLoggedIn()">
       <h3>You need to <a href="/#/login">Log In</a> or <a href="/#/register">Register</a> before you can comment.</h3>
