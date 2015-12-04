@@ -173,7 +173,7 @@ router.put('/posts/:post/comments/:comment/edit', auth, function(req, res, next)
 
 // delete a comment
 //router.delete('/posts/:post/comments/:comment/delete', auth, function(req, res, next) {
-router.delete('/posts/:post/comments/:comment/', function(req, res) {
+router.delete('/posts/:post/comments/:comment/delete', function(req, res) {
 	
 	Comment.remove({
 		_id: req.params.comment
